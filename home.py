@@ -18,6 +18,7 @@ if "jmeno" not in st.session_state:
 if "email" not in st.session_state:
     st.session_state["email"] = None # Email přihlášeného uživatele
 
+
 # Pokud je status přihlášení False (Nepravda), zobrazí se formulář pro přihlášení
 if not st.session_state["prihlasen"]:
     st.markdown(
