@@ -116,7 +116,7 @@ if st.session_state["prihlasen"]:
         pridana_polozka = pd.DataFrame({"id":[len(sklad)+1],"kategorie": [kategorie], "nazev": [nazev], "pocet": [pocet], "cena": [cena]})
         st.write(pridana_polozka)
         pridat = pd.concat([sklad, pridana_polozka], ignore_index=True)
-        pridat.to_csv("data.csv")
+        pridat.to_csv("data.csv", index=False)
         st.success("Položka byla přidána.")
         time.sleep(3)
         st.rerun()
