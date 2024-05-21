@@ -91,6 +91,7 @@ if st.session_state["prihlasen"]:
     
 
 #vyber kategorie, vyber polozky a editace parametru polozky
+    st.header("Editace ceny a kusů položky na skladě")
     kategorie = sklad["kategorie"].unique()
     vyber_kategorie = st.selectbox("Vyber kategorii", kategorie, key="editace_polozky")
     polozky = sklad[sklad["kategorie"] == vyber_kategorie]["nazev"].unique()
