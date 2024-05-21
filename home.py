@@ -84,6 +84,8 @@ if st.session_state["prihlasen"]:
 #zobrazeni polozky dle kategorie
     st.header("Zobrazení položky dle kategorie")
     kategorie = st.selectbox("Vyber kategorii", sklad["kategorie"].unique())
+    # serazeni polozek v kategorii dle abecedy
+    sklad = sklad.sort_values(by="nazev")
     st.dataframe(sklad[sklad["kategorie"] == kategorie])
     st.write("")    
     
@@ -120,7 +122,20 @@ if st.session_state["prihlasen"]:
         st.success("Položka byla přidána.")
         time.sleep(3)
         st.rerun()
+        
+# smazani polozky dle kategorie a nazvu
+    st.header("Smazání položky")
+    kategorie = st.selectbox("Kategorie", sklad["kategorie"].unique(),key="smazani_polozky")
+    nazev = st.selectbox("Název", sklad[sklad["kategorie"] == kategorie]["nazev"].unique(), key="smazani_polozky1")
+    if st.button("Smazat"):
+        sklad = sklad[(sklad["kategorie"] != kategorie) | (sklad["nazev"] != nazev)]
+        sklad.to_csv("data.csv", index=False)
+        st.success("Položka byla smazána.")
+        time.sleep(3)
+        st.rerun()
 # odhlaseni uzivatele
+
+    st.header("Odhlašení")
     if st.button("Odhlásit se"):
         st.session_state["prihlasen"] = False
         st.session_state["jmeno"] = None
